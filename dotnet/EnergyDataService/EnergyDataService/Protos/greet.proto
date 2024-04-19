@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option csharp_namespace = "EnergyDataService";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+    rpc GetDcData (DataRequest) returns (DataResponse);
+
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+
+service EnergyDataService {
+  // Retrieves DC data by date
+  rpc GetDcData (DataRequest) returns (DataResponse);
+
+  // Retrieves AC data by date
+  rpc GetAcData (DataRequest) returns (DataResponse);
+
+  // Retrieves total yield data by date
+  rpc GetTotalYieldData (DataRequest) returns (DataResponse);
+}
+
+message DcDataRequest {
+  string id = 1;  // ID to query specific DC data
+}
+
+message DcDataResponse {
+  bool success = 1;  
+  string message = 2; 
+}
+message DataResponse {
+  repeated DataEntry data = 1;
+  bool success = 2;  
+  string message = 3; 
+}

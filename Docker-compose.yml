@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  dotnet-service:
+    build:
+      context: ./path-to-dotnet-project-directory
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - mongodb
+
+  nodejs-service:
+    build:
+      context: ./path-to-nodejs-project-directory
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

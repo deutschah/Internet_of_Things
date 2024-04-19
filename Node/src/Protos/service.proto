@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package energyData;
+
+service EnergyDataService {
+  rpc GetDcData (DataRequest) returns (DataResponse);
+
+  rpc GetAcData (DataRequest) returns (DataResponse);
+
+  rpc GetTotalYieldData (DataRequest) returns (DataResponse);
+}
+
+message DataRequest {
+  string date = 1; // Expected format YYYY-MM-DD
+}
+
+message DataResponse {
+  repeated DataEntry data = 1;
+  bool success = 2;  
+  string message = 3; 
+}
+
+message DataEntry {
+  string id = 1; // Identifier for the data entry
+  double value = 2; // Value of DC, AC, or yield
+  string timestamp = 3; // Timestamp of the data recording, format YYYY-MM-DDThh:mm:ssZ
+}

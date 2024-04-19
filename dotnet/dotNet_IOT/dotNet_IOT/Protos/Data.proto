@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+option csharp_namespace="GrpcServer";
+
+package GrpcServer;
+
+service Data {
+  rpc GetSolarData (SolarDataRequest) returns (SolarDataResponse);
+  rpc AddSolarData (SolarData) returns (AddSolarDataResponse);
+ rpc GetSolarDataByDateTime(GetSolarDataByDateTimeRequest) returns (GetSolarDataByDateTimeResponse);
+rpc UpdateSolarData (UpdateSolarDataRequest) returns (UpdateSolarDataResponse);
+  rpc DeleteSolarData (DeleteSolarDataRequest) returns (DeleteSolarDataResponse);
+rpc GetMaxData(GetAggregationDataRequest) returns (AggregationDataResponse);
+rpc GetMinData(GetAggregationDataRequest) returns (AggregationDataResponse);
+rpc GetAverageData(GetAggregationDataRequest) returns (AggregationDataResponse);
+
+rpc GetData (GetAcDataRequest) returns (GetAcDataResponse);
+ rpc AddData(AddDataRequest) returns (AddDataResponse);
+  rpc UpdateData(UpdateDataRequest) returns (UpdateDataResponse);
+  rpc DeleteData(DeleteDataRequest) returns (DeleteDataResponse);
+}
+
+message PropertyData {
+  string dateTime = 1;
+  double acPower = 2;
+  double dcPower = 3;
+  double totalYield = 4;
+}
+
+message AddDataRequest {
+  PropertyData data = 1;
+}
+
+message AddDataResponse {
+  string message = 1;
+}
+
+message UpdateDataRequest {
+  string dateTime = 1;
+  PropertyData data = 2;
+}
+
+message UpdateDataResponse {
+  string message = 1;
+}
+
+message DeleteDataRequest {
+  string dateTime = 1;
+}
+
+message DeleteDataResponse {
+  string message = 1;
+}
+
+message GetAggregationDataRequest {
+    string from = 1;
+    string until = 2;
+    string property = 3;
+}
+
+message AggregationDataResponse {
+    double value = 1;
+}
+
+message GetAcDataRequest {
+    string from = 1;
+    string until = 2;
+}
+
+message GetAcDataResponse { 
+      repeated SolarDataEntry entries = 1;
+}
+
+message UpdateSolarDataRequest {
+  string id = 1; 
+  SolarData data = 2; 
+}
+
+message UpdateSolarDataResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message DeleteSolarDataRequest {
+  string id = 1; 
+}
+
+message DeleteSolarDataResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+
+message GetSolarDataByDateTimeRequest {
+  string date_time = 1;
+}
+
+message GetSolarDataByDateTimeResponse {
+  string date_time = 1;
+  double dc = 2;
+  double ac = 3;
+  double total_yield = 4;
+}
+
+message SolarDataRequest {
+  string date_range = 1; 
+}
+
+message SolarDataResponse {
+  repeated SolarDataEntry entries = 1;
+}
+
+message SolarData {
+  string date_time = 1;
+  double dc = 2;
+  double ac = 3;
+  double total_yield = 4;
+}
+
+message AddSolarDataResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message SolarDataEntry {
+  string date_time = 1;
+  double dc = 2;
+  double ac = 3;
+  double total_yield = 4;
+}
