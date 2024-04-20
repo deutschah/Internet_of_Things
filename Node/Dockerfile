@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm run build
 
+RUN npm install -g ts-node
+
 EXPOSE 3000
 
-CMD [ "node", "build/app.js" ]
+CMD [ "npm", "run" , "dev"]

@@ -1,5 +1,4 @@
 import { Request, Response, Router } from 'express';
-import { endpoint_names } from '../../enviroments';
 import { Operation } from 'express-openapi';
 import { DeleteData, GetData, PostData, UpdateData } from '../controllers/dataController';
 

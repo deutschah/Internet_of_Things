@@ -18,6 +18,6 @@ const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 const DataClient = (protoDescriptor.GrpcServer as any).Data;
 
 // Create the client instance
-const grpcClient = new DataClient('localhost:5039', grpc.credentials.createInsecure()); // Adjust the host and port if necessary
+const grpcClient = new DataClient('dotnet-service:8080', grpc.credentials.createInsecure()); // Adjust the host and port if necessary
 
 export default grpcClient;

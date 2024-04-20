@@ -1,30 +1,44 @@
-version: '3.8'
+version: '3'
 
 services:
-  dotnet-service:
-    build:
-      context: ./path-to-dotnet-project-directory
-      dockerfile: Dockerfile
-    ports:
-      - "5000:80"
-    depends_on:
-      - mongodb
-
-  nodejs-service:
-    build:
-      context: ./path-to-nodejs-project-directory
-      dockerfile: Dockerfile
+  node-service:
+    image: node-service:1
+    container_name: node-service-compose
     ports:
       - "3000:3000"
+    networks:
+      - BRIDGE
+    restart: always
     depends_on:
       - mongodb
 
   mongodb:
-    image: mongo:latest
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongodb-compose
     ports:
       - "27017:27017"
+    networks:
+      - BRIDGE
+    restart: always
     volumes:
-      - mongo-data:/data/db
+      - mongodb-data:/data/db
+
+  dotnet-service:
+    image: dotnet-service:1
+    container_name: dotnet-service-compose
+    ports:
+      - "8080:8080"
+    networks:
+      - BRIDGE
+    restart: always
+    depends_on:
+      - mongodb
+
+networks:
+  BRIDGE:
+    driver: bridge
 
 volumes:
-  mongo-data:
+  mongodb-data:
+    external: true
+    name: mongodb-data

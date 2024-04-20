@@ -20,5 +20,5 @@ export function createGrpcClient(): GreeterClient {
     console.error('Failed to load Greeter service. Check the package name and structure of the .proto file.');
     throw new Error('Failed to load Greeter service.');
   }
-  return new greeterProto.greeter.Greeter('localhost:5039', grpc.credentials.createInsecure()) as unknown as GreeterClient;
+  return new greeterProto.greeter.Greeter('localhost:8080', grpc.credentials.createInsecure()) as unknown as GreeterClient;
 }

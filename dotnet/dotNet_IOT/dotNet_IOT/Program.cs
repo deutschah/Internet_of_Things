@@ -8,7 +8,8 @@ using System.Collections;
 
 var builder = WebApplication.CreateBuilder(args);
 
-const string connectionString = "mongodb+srv://ficadojc24:FxF1zEmMYOH1k0kn@iot.j1mzxpy.mongodb.net/";
+const string connectionString = "mongodb://mongodb:27017/";
+
 
 var databaseName = "SolarPower";
 var collectionName = "SolarData"; if (string.IsNullOrEmpty(connectionString))
