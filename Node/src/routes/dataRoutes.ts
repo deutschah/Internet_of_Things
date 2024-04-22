@@ -12,6 +12,4 @@ router.put('/:dateTime', UpdateData);
 
 router.delete('/:dateTime', DeleteData);
 
-
-
 export default router;

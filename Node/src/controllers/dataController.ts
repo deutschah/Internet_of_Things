@@ -32,23 +32,26 @@ export const PostData = async (req: Request, res: Response) => {
     try {
         const { dateTime, acPower, dcPower, totalYield } = req.body;
   
+        const isValid = validateData({ dateTime, acPower, dcPower, totalYield });
+        if (!isValid) {
+          return res.status(400).json({ message: 'Invalid input data' });
+        }
+
         const dataRequest = { dateTime, acPower, dcPower, totalYield };
   
         grpcClient.PostData(dataRequest, (error: any, response: any) => {
             if (error) {
-                console.error('Error adding data:', error);
                 res.status(500).json({ message: 'Error adding data', details: error.message });
             } else {
-                console.log('Data added successfully:', response); 
                 res.json(response);
             }
         });
   
     } catch (error: any) {
-        console.error('Server error:', error);
         res.status(500).json({ message: 'Server error', details: error.message });
     }
   };
+
   
   export const UpdateData = async (req: Request, res: Response) => {
     try {
@@ -101,4 +104,13 @@ export const PostData = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Server error', details: error.message });
     }
   };
+
+function mapGrpcErrorToHttpStatus(error: any) {
+    throw new Error('Function not implemented.');
+}
+
+function validateData(arg0: { dateTime: any; acPower: any; dcPower: any; totalYield: any; }) {
+    return true;
+    throw new Error('Function not implemented.');
+}
 

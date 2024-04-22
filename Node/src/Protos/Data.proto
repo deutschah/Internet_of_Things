@@ -10,6 +10,8 @@ service Data {
  rpc GetSolarDataByDateTime(GetSolarDataByDateTimeRequest) returns (GetSolarDataByDateTimeResponse);
 rpc UpdateSolarData (UpdateSolarDataRequest) returns (UpdateSolarDataResponse);
   rpc DeleteSolarData (DeleteSolarDataRequest) returns (DeleteSolarDataResponse);
+
+  
 rpc GetMaxData(GetAggregationDataRequest) returns (AggregationDataResponse);
 rpc GetMinData(GetAggregationDataRequest) returns (AggregationDataResponse);
 rpc GetAverageData(GetAggregationDataRequest) returns (AggregationDataResponse);
